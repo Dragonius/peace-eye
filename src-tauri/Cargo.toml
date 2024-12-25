@@ -1,0 +1,29 @@
+[package]
+name = "peace-eye"
+version = "0.4.3"
+description = "Desktop GCI/AWACS simulator for Tacview and DCS World"
+authors = ["Kangwook Lee <pbzweihander@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/pbzweihander/peace-eye"
+edition = "2021"
+rust-version = "1.57"
+
+[build-dependencies]
+tauri-build = { version = "1.2", features = [] }
+
+[dependencies]
+once_cell = "1.17.2"
+reqwest = "0.11.18"
+semver = "1.0.17"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tacview-realtime-client = { git = "https://github.com/pbzweihander/tacview-realtime-client-rs.git", rev = "bea471ffbc9315f1965d500809ad004765017183" }
+tauri = { version = "1.2", features = ["api-all"] }
+time = { version = "0.3.17", features = ["parsing", "formatting", "serde"] }
+tokio = { version = "1.25.0", features = ["time", "sync", "parking_lot"] }
+tracing = "0.1.37"
+tracing-subscriber = { version = "0.3.16", features = ["fmt", "env-filter"] }
+
+[features]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]
