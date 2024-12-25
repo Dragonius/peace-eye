@@ -10,14 +10,14 @@ jobs:
   rustfmt:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: actions-rust-lang/setup-rust-toolchain@v1
       with:
         profile: minimal
         toolchain: stable
         components: rustfmt
     - name: Check rustfmt
-      uses: clechasseur/cargo@v2
+      uses: actions-rust-lang/rustfmt@v1
       with:
         command: fmt
         args: --manifest-path src-tauri/Cargo.toml -- --check
