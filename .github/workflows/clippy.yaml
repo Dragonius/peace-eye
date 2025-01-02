@@ -38,6 +38,6 @@ jobs:
       - name: Clippy
         uses: actions-rs/clippy-check@v1
         with:
-          args: -p src-tauri -- -D warnings
+          args: --manifest-path src-tauri/Cargo.toml --no-deps -- -D warnings
           name: Clippy Results
           token: ${{ secrets.GITHUB_TOKEN }}
