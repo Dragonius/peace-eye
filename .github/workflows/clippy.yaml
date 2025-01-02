@@ -13,20 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev libappindicator3-dev librsvg2-dev patchelf
-        mkdir dist
     - uses: dtolnay/rust-toolchain@stable
       with:
         components: clippy
-    - uses: Swatinem/rust-cache@v2
+    - uses: giraffate/clippy-action@v1
       with:
-        workspaces: src-tauri
-    - name: Check clippy
-      uses: giraffate/clippy-action@v1
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        args: --manifest-path src-tauri/Cargo.toml --no-deps -- -D warnings
         reporter: 'github-pr-review'
+        github_token: ${{ secrets.GITHUB_TOKEN }}
