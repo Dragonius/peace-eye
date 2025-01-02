@@ -15,29 +15,22 @@ jobs:
     permissions:
       checks: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Cargo Cache
-        id: cargo-cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cargo/.crates.toml
-            ~/.cargo/bin
-            ./target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-      - name: Toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          components: clippy
-          profile: minimal
-          override: true
-          toolchain: stable
-      - name: Clippy
-        uses: actions-rs/clippy-check@v1
-        with:
-          args: --manifest-path src-tauri/Cargo.toml --no-deps -- -D warnings
-          name: Clippy Results
-          token: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/checkout@v3
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev libappindicator3-dev librsvg2-dev patchelf
+        mkdir dist
+    - uses: actions-rs/toolchain@v1
+      with:
+        profile: minimal
+        toolchain: stable
+        components: clippy
+    - uses: Swatinem/rust-cache@v2
+      with:
+        workspaces: src-tauri
+    - name: Check clippy
+      uses: actions-rs/clippy-check@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        args: --manifest-path src-tauri/Cargo.toml --no-deps -- -D warnings
