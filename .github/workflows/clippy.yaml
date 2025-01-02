@@ -22,9 +22,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            ~/src-tauri/.cargo/.crates.toml
-            ~/src-tauri/.cargo/bin
-            ./src-tauri/target
+            ~/.cargo/.crates.toml
+            ~/.cargo/bin
+            ./target
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
             ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
@@ -38,6 +38,6 @@ jobs:
       - name: Clippy
         uses: actions-rs/clippy-check@v1
         with:
-          args: --workspace -- -D warnings
+          args: -p src-tauri -- -D warnings
           name: Clippy Results
           token: ${{ secrets.GITHUB_TOKEN }}
