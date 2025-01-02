@@ -9,14 +9,35 @@ on:
     - main
 
 jobs:
-  clippy:
+  cargo-clippy:
+    name: Cargo Clippy
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
     steps:
-    - uses: actions/checkout@v4
-    - uses: dtolnay/rust-toolchain@stable
-      with:
-        components: clippy
-    - uses: giraffate/clippy-action@v1
-      with:
-        reporter: 'github-pr-review'
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Cargo Cache
+        id: cargo-cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/.crates.toml
+            ~/.cargo/bin
+            ./target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - name: Toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          components: clippy
+          profile: minimal
+          override: true
+          toolchain: stable
+      - name: Clippy
+        uses: actions-rs/clippy-check@v1
+        with:
+          args: --workspace -- -D warnings
+          name: Clippy Results
+          token: ${{ secrets.GITHUB_TOKEN }}
