@@ -14,7 +14,7 @@
     "lint:fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx}'"
   },
   "dependencies": {
-    "@tauri-apps/api": "^1.2.0",
+    "@tauri-apps/api": "^1.6.0",
     "@turf/circle": "^6.5.0",
     "@typescript-eslint/parser": "^5.62.0",
     "classnames": "^2.3.2",
@@ -34,7 +34,7 @@
     "spinners-react": "^1.0.10"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^1.2.2",
+    "@tauri-apps/cli": "^1.6.3",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/node": "^18.7.10",
     "@types/proj4": "^2.5.2",
