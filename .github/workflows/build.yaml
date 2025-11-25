@@ -42,7 +42,7 @@ jobs:
       id: tauri-build
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v5
       with:
         name: ${{ matrix.platform }}
         path: "${{ join(fromJSON(steps.tauri-build.outputs.artifactPaths), '\n') }}"
