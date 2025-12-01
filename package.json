@@ -18,7 +18,7 @@
     "@turf/circle": "^6.5.0",
     "@typescript-eslint/parser": "^5.62.0",
     "classnames": "^2.3.2",
-    "daisyui": "^3.0.3",
+    "daisyui": "^5.5.5",
     "geojson": "^0.5.0",
     "geomagnetism": "^0.2.0",
     "mapbox-gl": "npm:empty-npm-package@1.0.0",
