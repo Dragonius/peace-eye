@@ -1,3 +1,5 @@
+# No time to fix security updates or problems. 
+# Gonna archive this
 # peace-eye
 
 ![screenshot](./screenshot.png)
